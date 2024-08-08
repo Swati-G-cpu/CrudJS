@@ -97,7 +97,7 @@ const updateMovie = async (name, img, summary, id) => {
   const movie = await getMovie(id);
   if (movie) {
     const updatedMovie = await prisma.movie.update({
-      where: { valid_record: { id: movie.id, deleted: false } },
+      where: { id: movie.id, deleted: false },
       data: { name, img, summary },
     });
 
@@ -108,14 +108,12 @@ const updateMovie = async (name, img, summary, id) => {
   throw new Error(Constants.movie.messages.MOVIE_NOT_FOUND);
 };
 const deleteMovie = async (id) => {
-  const movie = await getMovie(params);
+  const movie = await getMovie(id);
   if (movie) {
     const deletedMovie = await prisma.movie.delete({
       where: {
-        valid_record: {
-          id,
-          deleted: false,
-        },
+        id,
+        deleted: false,
       },
     });
     if (deletedMovie) {

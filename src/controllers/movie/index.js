@@ -63,7 +63,7 @@ const listMovies = async (request, response) => {
     appResponse.message = Constants.movie.messages.MOVIE_LIST_NOT_FOUND;
     if (movie.length > 0) {
       appResponse.status = Constants.HTTP.SUCCESS.code;
-      appResponse.message = `${Constants.movie.messages.MOVIE_LIST}`;
+      appResponse.message = `${Constants.movie.messages.MOVIE_LIST_FETCHED}`;
       appResponse.body = {
         records: responseArray,
         count: returnValues[0].length,
@@ -89,7 +89,7 @@ const updateMovie = async (request, response) => {
     const movie = await Service.updateMovie(name, img, summary, id);
     if (movie) {
       appResponse.status = Constants.HTTP.SUCCESS.code;
-      appResponse.message = `${Constants.movie.messages.MOVIE_UPDATE}`;
+      appResponse.message = `${Constants.movie.messages.MOVIE_UPDATED}`;
     } else {
       appResponse.status = Constants.HTTP.NOT_FOUND.code;
       appResponse.message = `${Constants.movie.messages.MOVIE_NOT_FOUND}`;
